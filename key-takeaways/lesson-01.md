@@ -12,10 +12,10 @@
 - Tracing
 - Code-gen
 ***First project***
-- Tao repo tren Github pw-course. Note/copy SSH link
 - Tạo folder pw-course
 - Open VS Code, open folder pw-course
 - Khởi tạo repo local: git init 
+- Tao repo tren Github pw-course. Note/copy SSH link
 - Liên kết repository vừa tạo với Git: git remote add origin <ssh_link>
 - Thêm code: git add . 
 - Thêm commit: git commit -m"init project"

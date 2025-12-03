@@ -145,28 +145,135 @@ arr.forEach((value,index) => {
 });
 **4.Array helper functions**
 Một số array utils thường dùng:
-● map: Tạo mảng mới bằng cách áp dụng một hàm lên từng phần tử
+● **map**: Tạo mảng mới bằng cách áp dụng một hàm lên từng phần tử
 của mảng gốc. Trả về mảng mới có cùng độ dài
-● filter: Tạo mảng mới chỉ chứa các phần tử thỏa mãn điều kiện
+vd1:
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6, 8, 10]
+console.log(numbers); // [1, 2, 3, 4, 5] - mảng gốc không thay đổi
+
+vd2:
+const students = ['An', 'Bình', 'Cường'];
+const studentList = students.map((name, index) =>
+({
+    id: index + 1,
+    name: name,
+    code: `SV00${index + 1}`
+}));
+console.log(studentList);
+// [
+// { id: 1, name: 'An', code: 'SV001' },
+// { id: 2, name: 'Bình', code: 'SV002' },
+// { id: 3, name: 'Cường', code: 'SV003' }
+// ]
+
+● **filter**: Tạo mảng mới chỉ chứa các phần tử thỏa mãn điều kiện
 trong hàm callback. Trả về mảng đã được lọc
-● find: Tìm và trả về phần tử đầu tiên trong mảng thỏa mãn điều
+vd:
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log(evenNumbers); // [2, 4, 6, 8, 10]
+console.log(numbers); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] - mảng gốc không đổi
+
+● **find**: Tìm và trả về phần tử đầu tiên trong mảng thỏa mãn điều
 kiện. Trả về undefined nếu không tìm thấy
-● reduce: Duyệt qua mảng và tích lũy các phần tử thành một giá trị
+vd:
+const numbers = [1, 5, 3, 8, 2, 10, 7];
+// Tìm số chẵn đầu tiên
+const firstEven = numbers.find(num => num % 2 === 0);
+console.log(firstEven); // 8 (không phải 2 hay 10)
+
+● **reduce**: Duyệt qua mảng và tích lũy các phần tử thành một giá trị
 duy nhất (số, chuỗi, object...) dựa trên hàm callback
-● some: Kiểm tra xem có ít nhất một phần tử trong mảng thỏa mãn
+
+
+● **some**: Kiểm tra xem có ít nhất một phần tử trong mảng thỏa mãn
 điều kiện hay không. Trả về true/false.
-● every: Kiểm tra xem tất cả phần tử trong mảng có thỏa mãn điều
+vd:
+const numbers = [1, 3, 5, 7, 8, 9];
+// Kiểm tra có số chẵn không?
+const hasEven = numbers.some(num => num % 2 === 0);
+console.log(hasEven); // true (vì có số 8)
+
+● **every**: Kiểm tra xem tất cả phần tử trong mảng có thỏa mãn điều
 kiện hay không. Trả về true/false.
-● sort: Sắp xếp các phần tử trong mảng theo thứ tự (mặc định là
+vd:
+const numbers = [2, 4, 6, 8, 10];
+// Kiểm tra tất cả là số chẵn?
+const allEven = numbers.every(num => num % 2 === 0);
+console.log(allEven); // true
+
+● **sort**: Sắp xếp các phần tử trong mảng theo thứ tự (mặc định là
 alphabet/tăng dần). Thay đổi mảng gốc.
-● push: Thêm một hoặc nhiều phần tử vào cuối mảng. Thay đổi mảng
+vd1:
+// Sort chuỗi
+const fruits = ['banana', 'apple', 'orange','grape'];
+fruits.sort();
+console.log(fruits); // ['apple', 'banana', 'grape', 'orange']
+vd2:
+const numbers2 = [10, 5, 40, 25, 1000, 1];
+numbers2.sort((a, b) => a - b); // tăng dần
+console.log(numbers2); // [1, 5, 10, 25, 40, 1000] - ĐÚNG!
+vd3:
+// Giảm dần
+const numbers3 = [10, 5, 40, 25, 1000, 1];
+numbers3.sort((a, b) => b - a);
+console.log(numbers3); // [1000, 40, 25, 10, 5,1]
+
+● **push**: Thêm một hoặc nhiều phần tử vào cuối mảng. Thay đổi mảng
 gốc và trả về độ dài mới.
-● pop: Xóa và trả về phần tử cuối cùng của mảng. Thay đổi mảng gốc
+vd:
+const fruits = ['apple', 'banana'];
+const newLength = fruits.push('orange');
+console.log(fruits); // ['apple', 'banana',
+'orange']
+console.log(newLength); // 3 (độ dài mới)
+// Push nhiều phần tử cùng lúc
+fruits.push('grape', 'mango');
+console.log(fruits); // ['apple', 'banana', 'orange', 'grape', 'mango']
+
+● **pop**: Xóa và trả về phần tử cuối cùng của mảng. Thay đổi mảng gốc
 và làm giảm độ dài.
-● shift: Xóa và trả về phần tử đầu tiên của mảng. Thay đổi mảng gốc
+vd:
+const fruits = ['apple', 'banana', 'orange', 'grape'];
+const lastFruit = fruits.pop();
+console.log(lastFruit); // 'grape' - phần tử bị xóa
+console.log(fruits); // ['apple', 'banana', 'orange'] - mảng đã thay đổi
+
+// Pop từ mảng rỗng
+const empty = [];
+const result = empty.pop();
+console.log(result); // undefined
+console.log(empty); // []
+
+● **shift**: Xóa và trả về phần tử đầu tiên của mảng. Thay đổi mảng gốc
 và làm giảm độ dài.
-● unshift: Thêm một hoặc nhiều phần tử vào đầu mảng. Thay đổi
+vd:
+const fruits = ['apple', 'banana', 'orange', 'grape'];
+const firstFruit = fruits.shift();
+
+console.log(firstFruit); // 'apple' - phần tử bị xóa
+console.log(fruits); // ['banana', 'orange', 'grape'] - mảng đã thay đổi
+
+// Shift từ mảng rỗng
+const empty = [];
+const result = empty.shift();
+console.log(result); // undefined
+console.log(empty); // []
+
+● **unshift**: Thêm một hoặc nhiều phần tử vào đầu mảng. Thay đổi
 mảng gốc và trả về độ dài mới của mảng.
+vd:
+const fruits = ['banana', 'orange'];
+const newLength = fruits.unshift('apple');
+
+console.log(fruits); // ['apple', 'banana', 'orange']
+console.log(newLength); // 3 (độ dài mới)
+
+// Unshift nhiều phần tử cùng lúc
+fruits.unshift('grape', 'mango');
+console.log(fruits); // ['grape', 'mango', 'apple', 'banana', 'orange']
 
 **5.String helper functions**
 Một số string utils thường dùng:
